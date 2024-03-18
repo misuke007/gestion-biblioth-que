@@ -10,13 +10,13 @@ let option = {
     secretOrKey : 'secret' 
 }
 
-passport.use("cb" , new JwtStrategy (option , async(paylode , done ) => {
+passport.use("membre" ,  new JwtStrategy (option , async(paylode , done ) => {
 
     try{
 
         const user = await Utilisateur.findOne({where:{email : paylode.email}})
 
-        return user.badge == "membre" && user.statut == "en attente" ?   done(null , user) :  done(null , false)
+        return user.badge == "membre" && user.statut == "actif" ?   done(null , user) :  done(null , false)
 
     }catch(error){console.log(error)}
 }))

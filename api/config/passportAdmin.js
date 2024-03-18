@@ -10,13 +10,13 @@ let option = {
     secretOrKey : 'secret' 
 }
 
-passport.use(new JwtStrategy (option , async(paylode , done ) => {
+passport.use("admin" ,  new JwtStrategy (option , async(paylode , done ) => {
 
     try{
 
         const user = await Utilisateur.findOne({where:{email : paylode.email}})
 
-        return user.badge == "ADMIN"  ?   done(null , user) :  done(null , false)
+        return user.badge == "ADMIN" ?   done(null , user) :  done(null , false)
 
     }catch(error){console.log(error)}
 }))

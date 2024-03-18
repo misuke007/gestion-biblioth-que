@@ -134,15 +134,6 @@ exports.commentaire = async(req, res) => {
     }
 }
 
-exports.commentaires =  async(req, res) => {
-    try {
-        const commentaires =  await Commentaire.findAll({where : {LivreId : req.params.id}})
-        return res.status(200).json(commentaires)
-    } catch (error) {
-        console.log(error)
-    }
-}
-
 exports.reponse =async(req, res)=> {
     try {
     
@@ -155,15 +146,6 @@ exports.reponse =async(req, res)=> {
         }) 
         await new_reponse.save()
         return res.status(200).json(new_reponse)
-    } catch (error) {
-        console.log(error)
-    }
-}
-
-exports.reponses =  async(req, res) => {
-    try {
-        const reponses =  await Reponses.findAll({where : {CommentaireId : req.params.id}})
-        return res.status(200).json(reponses)
     } catch (error) {
         console.log(error)
     }

@@ -13,9 +13,8 @@ exports.ajout = async (req, res, table, data, passAdmin) => {
 
             const newData = table.build(data)
             const prevData = await newData.save()
-            const token = jwt.sign({ id: prevData.id, email: prevData.email }, 'secret')
 
-            return passAdmin ? res.status(200).json({ message: `Inscription réuissie`, token, passAdmin }) : res.status(200).json({ message: `Inscription réuissie`, token })
+            return passAdmin ? res.status(200).json({ message: `Inscription réuissie`, passAdmin }) : res.status(200).json({ message: `Inscription réuissie`, prevData })
 
         } catch (error) { console.log(error) }
 

@@ -107,9 +107,8 @@ exports.login = async(req, res) => {
         const verificationMdp = bcrypt.compareSync(mot_de_passe , utilisateur.mot_de_passe)
         if(!verificationMdp) return res.status(200).json({message_error : "Mot de passe invalide!"})
 
-        const token = jwt.sign({id : utilisateur.id , email : utilisateur.email} , 'secret')
-        return res.status(200).json({token}) 
-        
+        const token = jwt.sign({id : utilisateur.id , email : utilisateur.email , badge : utilisateur.badge , status : utilisateur.statut} , 'secret')
+        return res.status(200).json({token , badge : utilisateur.badge}) 
 
     }catch(error){console.log(error)}
 

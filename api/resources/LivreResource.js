@@ -1,4 +1,6 @@
 const express = require('express')
+const AutorisationAdmin = require('../config/AutorisationAdmin')
+const AutorisationMembre = require('../config/AutorisationMembre')
 const router = express.Router()
 
 const {
@@ -11,24 +13,22 @@ const {
     trierParCategorie,
     popularite,
     commentaire,
-    reponse,
-    commentaires} = require('../controllers/LivreContr')
+    reponse} = require('../controllers/LivreContr')
 
 
 
 
 
-router.post('/livre/ajout' ,ajoutLivre )
+router.post('/livre/ajout' ,AutorisationAdmin,ajoutLivre )
 router.post('/livre/recherche' ,rechercheLivre )
-router.put('/livre/miseJour/:id' ,miseJourLivre )
-router.delete('/livre/supprimer/:id' , supprimerLivre)
+router.put('/livre/miseJour/:id' ,AutorisationAdmin,miseJourLivre )
+router.delete('/livre/supprimer/:id' ,AutorisationAdmin, supprimerLivre)
 router.get('/livre/tout' , toutLivre)
 router.get('/livre/un/:id' , unLivre)
 router.get('/livre/triParCategorie/:categorieId' , trierParCategorie)
 router.get('/livre/popularite' , popularite)
-router.post('/livre/commentaire/:id' , commentaire)
-router.get('/livre/commentaire/:id' , commentaires)
-router.post('/livre/commentaire/reponse/:id' , reponse)
+router.post('/livre/commentaire/:id' ,AutorisationMembre, commentaire)
+router.post('/livre/commentaire/reponse/:id' ,AutorisationMembre, reponse)
 
 
 

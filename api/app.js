@@ -4,8 +4,10 @@ const cors = require('cors')
 const db = require('./models')
 const  fileUpload = require('express-fileupload')
 const path =  require('path')
-const passport = require('passport')
-require('./config/passportMembreActif')
+
+
+
+
 
 const resaObsolete = require('./library/reservationObsolete')
 const calculAmende = require('./library/calculAmende')
@@ -33,10 +35,6 @@ app.use('/api' , LivreResource)
 app.use('/admin' , AdminResource)
 app.use('/auth' , AuthResource)
 app.use('/emprunt' , EmpruntResource)
-
-
-
-
 
 
 

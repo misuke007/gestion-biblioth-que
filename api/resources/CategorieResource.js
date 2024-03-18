@@ -1,13 +1,16 @@
 const express = require('express')
-const { ajoutCategorie, miseJourCategorie, supprimerCategorie, toutCategorie, unCategorie } = require('../controllers/CategorieContr')
+const AutorisationAdmin = require('../config/AutorisationAdmin')
 const router = express.Router()
+const { ajoutCategorie, miseJourCategorie, supprimerCategorie, toutCategorie, unCategorie } = require('../controllers/CategorieContr')
 
 
-router.post('/categorie/ajout' , ajoutCategorie)
-router.put('/categorie/miseJour/:id' , miseJourCategorie)
-router.delete('/categorie/suppression/:id' , supprimerCategorie)
+
+
+router.post('/categorie/ajout' , AutorisationAdmin, ajoutCategorie)
+router.put('/categorie/miseJour/:id', AutorisationAdmin, miseJourCategorie)
+router.delete('/categorie/suppression/:id',AutorisationAdmin, supprimerCategorie)
 router.get('/categorie/tout' , toutCategorie)
-router.get('/categorie/un/:id' , unCategorie)
+router.get('/categorie/un/:id',AutorisationAdmin, unCategorie)
 
 
 
