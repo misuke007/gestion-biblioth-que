@@ -99,6 +99,8 @@ exports.login = async(req, res) => {
 
     const {email , mot_de_passe} = req.body
 
+    console.log(email , mot_de_passe)
+
     try{
 
         const utilisateur = await Utilisateur.findOne({where:{email}})

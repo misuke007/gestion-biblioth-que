@@ -1,0 +1,254 @@
+body {
+    font-family: 'Poppins', sans-serif;
+  }
+
+
+.box{
+
+    width: 100px;
+    height: 100px;
+    background-color: red;
+}
+
+
+
+.pdp-register{
+
+  width: 110px;
+  height: 110px;
+  border-radius: 100px;
+
+  overflow: hidden;
+}
+
+
+
+
+.displayNone {
+
+  display : none
+}
+
+.bg-login {
+
+  background-image: url('../assets/images/books-1204029_1280.jpg');
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+
+}
+
+
+
+.left-box-register{
+
+  background-image: url('../assets/images/i\ want\ cartoon\ style\ book\ images\ in\ png.jpg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: fixed;
+  height: 100vh;
+}
+
+
+.cover {
+  width: 100%;
+  height: 100vh;
+  background-color: #202020a8;
+}
+
+.input-group .email:focus {
+  outline: none !important;
+}
+
+.biblioTitre{
+
+  color:#6D4C41 ;
+}
+
+.btn-auth {
+
+  background-color:    #6D4C41;
+  color: #fff;
+}
+
+.btn-auth-load{
+
+  background-color:  #6D4C41 !important; 
+  color: #fff !important; 
+  border-color:#5D4037 !important; 
+
+}
+
+
+.btn-auth:hover {
+  background-color:  #5D4037; 
+  color: #fff; 
+  border-color:  #5D4037; 
+  /* border-color:  #997f77;  */
+}
+
+
+
+.loginError {
+
+  animation: slideError 1s ease ;
+  
+}
+
+.login-box{
+
+  width: 745px;
+}
+
+.feature-img img{
+
+    overflow: hidden;
+}
+
+.input-group .register-pdp{
+
+  width: 130px;
+  height: 130px;
+  background-image: url('../assets/images/5197086.jpg');
+  border-radius: 10px;
+  border: 4px solid #5D4037 ;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  position: relative;
+
+}
+
+
+
+
+.input-group label {
+  text-decoration: none;
+  position: absolute;
+  font-size: 14px;
+  bottom: -36px;
+  background-color: #5D4037;
+  color: white;
+  text-align: center;
+  border-radius: 10px;
+  transition: 0.5s ease;
+  cursor: pointer;
+ 
+}
+
+.input-group label:hover {
+  background-color: #fff;
+  border: 1px solid #5D4037;
+  color: #5D4037;
+}
+
+.form-control {
+  
+  border-color: #d1c4c4;
+}
+
+
+
+.right-box{
+
+  padding: 40px 30px 40px 40px ;
+}
+
+.right-box-register{
+
+  margin-left: 330px;
+
+}
+
+
+
+
+
+@keyframes slideError{
+
+  from{
+
+    transform: translateY(-100px);
+    
+  }
+  to{
+      transform: translateY(0px);
+  }
+}
+
+
+
+
+@media only screen and (max-width : 732px){
+
+  .login-box{
+
+      margin: 0 10px;
+  }
+
+  .left-box{
+
+      height: 100px;
+      overflow: hidden;
+  }
+}
+
+
+
+
+
+@media (max-width: 576px) {
+
+  .right-box-register{
+
+    margin-left: 0;
+    margin-top:100px;
+  
+  }
+
+  .left-box-register{
+
+    background-position: top;
+    height: 100px;
+    z-index: 1;
+  }
+
+}
+
+
+@media (min-width: 576px) and (max-width: 768px) {
+
+  .right-box-register{
+
+    margin-left: 0;
+    margin-top:100px;
+  
+  }
+
+  .left-box-register{
+
+    background-position: top;
+    height: 100px;
+    z-index: 1;
+  }
+ 
+}
+
+
+@media (min-width: 768px) and (max-width: 992px) {
+ 
+  .right-box-register{
+
+    margin-left:180px;
+    padding-left: 100px !important;
+  
+  }
+  
+}
+
+
+@media (min-width: 992px) and (max-width: 1200px) {
+  /* Styles pour les tailles d'écran LG */
+}
+

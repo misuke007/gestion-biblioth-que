@@ -18,10 +18,6 @@ const {
     paiementMembre,
     disponibilitéLivre} = require('../controllers/AdminContr')
   
-
-
-
-
    
 router.use(AutorisationAdmin)
 

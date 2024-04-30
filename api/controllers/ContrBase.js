@@ -158,7 +158,7 @@ exports.voirUn = async (req, res, table, id, badge) => {
 
 
             default: {
-                findOne
+                
 
                 data = await table.findOne({ where: { id } })
                 break
