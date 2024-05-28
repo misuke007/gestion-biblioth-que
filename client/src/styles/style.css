@@ -1,15 +1,284 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&display=swap');
+
 body {
     font-family: 'Poppins', sans-serif;
   }
 
 
+  .logoBibliotheque {
+    font-family: 'Dancing Script', cursive;
+    font-size: 48px;
+}
+
 .box{
 
     width: 100px;
     height: 100px;
-    background-color: red;
+   
 }
 
+
+
+.navbar-brand {
+
+  font-weight: 500;
+  font-size: 24px;
+  transition: 0.3s color;
+}
+
+.navbar {
+
+  background-color: #fff;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+  height: 70px;
+
+}
+
+.section-recherche{
+  
+  height: 150px;
+  background-image: url('../assets/images/books-1204029_1280.jpg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  margin-top: 70px;
+}
+
+.section-recherche-bg{
+
+  height: 150px;
+  background-color: #0000006e;
+}
+
+
+.formHomeSearch{
+  /* background-color: red; */
+  height: 150px;
+}
+
+.formHomeSearch input , .formHomeSearch select ,.formHomeSearch button {
+
+  height: 40px;
+  border: none;
+  background-color: #FFF;
+  outline: none;
+}
+
+
+.formHomeSearch input  {
+
+  width: 94%;
+  border-left: 2px solid rgb(184, 184, 184);
+  transition: 0.5s ease-in-out;
+  transition: 0.5s ease-in-out;
+}
+
+
+
+.formHomeSearch button  {
+
+  color:#6D4C41 ;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+
+}
+
+.formHomeSearch select  {
+
+ border-top-left-radius: 5px;
+ border-bottom-left-radius: 5px;
+ font-size: 13px;
+ font-weight: bold;
+ color: #6D4C41;
+
+}
+
+
+
+
+.sectionTitle::before{
+
+  content: "";
+  position:absolute ;
+  bottom: 0;
+  width: 50%;
+  height: 5px;
+  background-color:#6D4C41 ;
+
+}
+
+
+
+
+.sectionNouveaute{
+
+  background-color: #6D4C41;
+}
+
+.cardLivre {
+  height: 215px;
+  background-color: #FFF;
+  overflow: hidden;
+  border: 1px solid rgba(0, 0, 0, 0.1); /* Fine border for the card */
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1), 
+              0 6px 20px rgba(0, 0, 0, 0.1);
+
+}
+
+
+.cardLivre ul{
+
+  list-style: none;
+  color: grey;
+}
+
+.cardLivre .card-image{
+
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+
+}
+
+.cardLivre .cardTitle{
+
+  font-family: 'Dancing Script', cursive;
+  font-size: 26px;
+}
+
+.cardButton{
+
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  font-size: 15px;
+  color: white;
+  background-color: #6D4C41; /* Right side color */
+  border: none;
+  border-radius: 0.25rem;
+  overflow: hidden;
+  transition: 0.3s  ease-in-out;
+}
+
+.cardButton:hover{
+
+  background-color: #7a594e;
+
+}
+
+.cardButton::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 30%;
+  background-color: #101010;
+  z-index: 0;
+
+}
+
+.cardButton .icon  {
+
+  z-index: 1;
+
+}
+
+.cardButton .text {
+  font-size: 12px;
+  margin-left: 25px;
+}
+
+
+.slick-prev:before,
+.slick-next:before {
+  font-size: 40px!important;
+  color: #000000f0!important;
+
+}
+
+/* Additional styles for better visibility */
+.slick-prev,
+.slick-next {
+  z-index: 1;
+}
+
+.slick-prev {
+  left : 0!important
+}
+
+.slick-next {
+  right: 16px!important; 
+}
+
+
+/* .cardLivre:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 16px rgba(0, 0, 0, 0.2), 
+              0 16px 40px rgba(0, 0, 0, 0.2);
+}  */
+
+
+/* content : "";
+position: absolute;
+bottom: 0;
+left: 50%;
+transform: translateX(-50%);
+width:0;
+height: 2px;
+visibility: hidden;
+transition: 0.3s ease-in-out;
+background-color: #6D4C41; */
+
+
+
+
+
+
+
+.nav-loginBtn{
+
+  background-color: #6D4C41;
+  font-size: 14px;
+  padding: 8px 20px;
+  border-radius: 50px;
+  text-decoration: none;
+  transition: 0.3s background-color;
+  color: #fff;
+ 
+}
+
+
+
+
+.nav-loginBtn:hover{
+
+  background-color: #916556;
+}
+
+.navbar-toggler {
+  border: none;
+  font-size: 1.25rem;
+}
+
+.navbar-toggler:focus , .btn-close:focus{
+  box-shadow: none;
+  outline: none;
+}
+
+.nav-link {
+
+  color : #666777;
+  font-weight: 500;
+  position: relative;
+}
+
+.nav-link:hover{
+
+  color : #000;
+}
 
 
 .pdp-register{
@@ -17,7 +286,6 @@ body {
   width: 110px;
   height: 110px;
   border-radius: 100px;
-
   overflow: hidden;
 }
 
@@ -88,6 +356,26 @@ body {
   /* border-color:  #997f77;  */
 }
 
+.carteLogo{
+
+  width: 70px;
+  height: 40px;
+ 
+}
+
+.formConfirm{
+
+  background-color: red;
+  border-radius: 10px;
+   width: 35%;
+  position: absolute;
+}
+
+.btn-close-formConfirm {
+  position: absolute;
+  left: 96%;
+  top: -35px;
+}
 
 
 .loginError {
@@ -194,6 +482,12 @@ body {
   }
 }
 
+.formValidation {
+
+    width: 600px;
+
+}
+
 
 
 
@@ -248,7 +542,28 @@ body {
 }
 
 
-@media (min-width: 992px) and (max-width: 1200px) {
-  /* Styles pour les tailles d'écran LG */
+@media (min-width: 992px){
+  .nav-link::before {
+
+    content : "";
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width:0;
+    height: 2px;
+    visibility: hidden;
+    transition: 0.3s ease-in-out;
+    background-color: #6D4C41;
+  }
+  
+  
+  .nav-link:hover::before , .nav-link.active::before {
+  
+    width: 100%;
+    visibility: visible;
+  }
+  
 }
+
 

@@ -13,7 +13,8 @@ const {
     trierParCategorie,
     popularite,
     commentaire,
-    reponse} = require('../controllers/LivreContr')
+    reponse,
+    nouveauteLivre} = require('../controllers/LivreContr')
 
 
 
@@ -24,6 +25,7 @@ router.post('/livre/recherche' ,rechercheLivre )
 router.put('/livre/miseJour/:id' ,AutorisationAdmin,miseJourLivre )
 router.delete('/livre/supprimer/:id' ,AutorisationAdmin, supprimerLivre)
 router.get('/livre/tout' , toutLivre)
+router.get('/livre/nouveaute' , nouveauteLivre)
 router.get('/livre/un/:id' , unLivre)
 router.get('/livre/triParCategorie/:categorieId' , trierParCategorie)
 router.get('/livre/popularite' , popularite)

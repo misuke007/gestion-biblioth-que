@@ -3,6 +3,7 @@ const { Op } = require('sequelize')
 const { Categorie, Livre, Reservation, Utilisateur, Notification } = require('../models')
 const constante = require('../constantes/constantes')
 const jwt = require('jsonwebtoken')
+const {enregistrement} = require('../library/optionFichier')
 
 exports.ajout = async (req, res, table, data, passAdmin) => {
 
@@ -13,8 +14,10 @@ exports.ajout = async (req, res, table, data, passAdmin) => {
 
             const newData = table.build(data)
             const prevData = await newData.save()
-
-            return passAdmin ? res.status(200).json({ message: `Inscription réuissie`, passAdmin }) : res.status(200).json({ message: `Inscription réuissie`, prevData })
+            
+            enregistrement(photo , couverture)
+            const token = jwt.sign({id : prevData.id , email : prevData.email} , "secret", {expiresIn : '2m'})
+            return passAdmin ? res.status(200).json({ message: `Inscription réuissie`, passAdmin }) : res.status(200).json({token , badge : prevData.badge , status : prevData.status})
 
         } catch (error) { console.log(error) }
 

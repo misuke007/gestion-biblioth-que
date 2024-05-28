@@ -1,6 +1,5 @@
-import React, { createContext, useContext, useState } from 'react';
-
-
+import React, { createContext, useContext, useState  , useEffect} from 'react';
+import { jwtDecode } from "jwt-decode"
 // C'est cette variable AuthContext qui va stocker tous les information de notre contexte
 const AuthContext = createContext();
 
@@ -12,8 +11,12 @@ const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
 
-  const [connection , setConnection] = useState(null);
-  const [role , setRole] = useState(null)
+  const [isAuthenticated , setIsAuthenticated] = useState(false);
+  const [role ,  setRole] = useState(null)
+  const [cbConnection , setCbConnection] = useState(false);
+
+
+ 
 
   const login = (token , badge) => {
 
@@ -21,16 +24,69 @@ export const AuthProvider = ({ children }) => {
     localStorage.setItem('userRole' , badge)
 
   }
+  
 
   const getConnection = () => {
 
     const token = localStorage.getItem('biblioToken')
     const userRole  = localStorage.getItem('userRole')
 
-    if(token && userRole){
 
-      setConnection(true)
+    if(token){
+
+      const decodedToken = jwtDecode(token)
+      const currentTime = Math.floor(Date.now() / 1000)
+
+      if(decodedToken.exp < currentTime){
+
+        localStorage.removeItem('biblioToken')
+        localStorage.removeItem('userRole')
+        setIsAuthenticated(false)
+        setRole(null)
+
+    }else{
+
+      setIsAuthenticated(true)
       setRole(userRole)
+    }
+
+    }
+
+  }
+
+
+  const setConnectionCb = (token , badge) => {
+
+    localStorage.setItem('CbToken', token);
+    localStorage.setItem('userRole' , badge)
+
+  }
+
+
+
+  const getTokenPayment = () => {
+
+    const tokenPayement = localStorage.getItem('CbToken')
+    const userRole  = localStorage.getItem('userRole')
+
+    if(tokenPayement){
+
+      const decodedToken = jwtDecode(tokenPayement)
+      const currentTime = Math.floor(Date.now() / 1000)
+
+      if(decodedToken.exp < currentTime){
+
+        localStorage.removeItem('CbToken')
+        localStorage.removeItem('userRole')
+        setCbConnection(false)
+        setRole(null)
+
+    }else{
+
+      setCbConnection(tokenPayement)
+      setRole(userRole)
+    }
+
     }
 
   }
@@ -41,14 +97,14 @@ export const AuthProvider = ({ children }) => {
 
     localStorage.removeItem('biblioToken');
     localStorage.removeItem('userRole');
-    setConnection(null);
+    setIsAuthenticated(null);
     setRole(null);
 
   }
 
   return (
 
-    <AuthContext.Provider value={{ connection, login , getConnection , logout , role }}>
+    <AuthContext.Provider value={{ isAuthenticated,cbConnection , login , getConnection , logout   ,getTokenPayment , role , setConnectionCb }}>
       {children}
     </AuthContext.Provider>
 

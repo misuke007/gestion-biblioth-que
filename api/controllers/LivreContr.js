@@ -33,12 +33,19 @@ Reponse.belongsTo(Utilisateur)
 
 exports.ajoutLivre = (req, res) => {
 
-    const {titre  , auteur  ,  annee_publication, CategorieId , exemplaire} = req.body
+    const {titre  , auteur  ,  annee_publication, CategorieId , exemplaire , nouveaute} = req.body
     const {photo}  = req.files
     let couverture = nouveauNom(photo)
     enregistrement(photo , couverture)
-    ajout(req , res , Livre , {titre  , auteur  ,  annee_publication ,couverture, CategorieId , exemplaire})
+    ajout(req , res , Livre , {titre  , auteur  ,  annee_publication ,couverture, CategorieId , exemplaire , nouveaute})
 
+}
+
+
+exports.nouveauteLivre = async(req, res) => {
+
+    const data = await Livre.findAll({where:{nouveaute : true} , limit : 10})
+    return res.status(200).json({data})
 }
 
 

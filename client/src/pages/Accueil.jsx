@@ -2,34 +2,38 @@ import axios from "axios"
 import { useState } from "react"
 import { useAuth } from "../AuthContext/AuthContext"
 import { useEffect } from "react"
+import { useNavigate , Outlet } from "react-router-dom"
+import Navbar from "../components/Navbar"
+import Recherche from "../components/Recherche"
+import NouveauT from "../components/NouveauT"
+import ListeLivre from "../components/ListeLivre"
+
 
 
 export default function Accueil(){
 
-    let {connection , getConnection , logout , role} = useAuth()
-
-
-    useEffect(() => {
-        
-        getConnection()
-        
-    })
-
-    console.log(connection,role)
-      
+    let {isAuthenticated , getConnection , roleAccess ,  logout , role } = useAuth()
+    let navigate = useNavigate()
     
+    
+    useEffect(() => {
+
+        getConnection()
+    })
+ 
+    // localStorage.removeItem('biblioToken');
+    // localStorage.removeItem('userRole');
+   
     return (
 
         <div>
-            {
-                connection ? (
+           
 
-                    <h2>Tongasoa eto @ Accueil</h2>
-                ):(
-
-                    <h2>Tsisy connecté</h2>
-                )
-            }
+           <Navbar/>
+           {/* ato amn recherche no mampisy ilay defilement horizontale */}
+           <Recherche/>
+           <NouveauT/>
+           <Outlet/>
             
           
         </div>

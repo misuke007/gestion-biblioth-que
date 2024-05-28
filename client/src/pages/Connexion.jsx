@@ -1,8 +1,13 @@
 import axios from "axios"
 import { useState , useContext } from "react"
-import {Navigate, useNavigate , Link} from 'react-router-dom'
+import {Navigate, useNavigate , Link , useLocation} from 'react-router-dom'
 import loginImg from  "../assets/images/I want an image that represents people.jpg"
 import { useAuth } from "../AuthContext/AuthContext"
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCircleExclamation } from '@fortawesome/free-solid-svg-icons';
+import { faCircleCheck } from '@fortawesome/free-solid-svg-icons';
+
+
 
 
 let dataLogin = {
@@ -18,6 +23,10 @@ export default function Connexion(){
     let [message_error , setMessage_error ] = useState("")
     let [loading , setLoading] = useState(false)
     let {login} = useAuth()
+    const location = useLocation()
+    const {successMsg} = location.state || {}
+
+    console.log(successMsg)
 
 
     let navigate = useNavigate()
@@ -107,13 +116,40 @@ export default function Connexion(){
                         <form action="" onSubmit={Login}>
 
                         <div className="header-text mb-5">
-                        <h2>Bibliothèque<span className = "biblioTitre">Éclat</span></h2>
+                        <h2 className="logoBibliotheque">Bibliothèque<span className = "biblioTitre">Éclat</span></h2>
                         <p>Connectez-vous pour profiter pleinement de notre application</p>
                         </div>
 
                         <div className="input-group">
-                            <div className = "alert alert-danger w-100 p-2 text-center alert-dismissible  loginError displayNone">{message_error}</div>
-                            {/* <div className="chargement"></div> */}
+
+                            <div class="alert alert-danger displayNone loginError w-100" role="alert" style={{position:'relative'}}>
+                                   <div className="d-flex align-items-center">
+                                    <FontAwesomeIcon icon={faCircleExclamation} style={{fontSize:'20px'}} className="pe-2"/>
+                                        <div className="w-100"><strong>{message_error}</strong></div>
+                                        <button type="button" class="btn-close ms-3" onClick={()=> document.querySelector('.loginError').classList.add('displayNone')} style={{position:'absolute' , top:'5px', right:'3px' , fontSize:'12px' }}></button>
+                                   </div>
+                            </div>
+
+
+                            {
+                                // message pour les inscriptions validées
+
+                                successMsg && (
+                                    // <div className = "alert alert-success w-100 p-2 text-center alert-dismissible loginError">{successMsg}</div>
+
+                                    <div class="alert alert-success  loginError w-100" role="alert" style={{position:'relative'}}>
+                                        
+                                        <div className="d-flex align-items-center">
+                                        <FontAwesomeIcon icon={faCircleCheck} style={{fontSize:'20px'}} className="pe-2"/>
+                                            <div className="w-100"><strong>{successMsg}</strong></div>
+                                            <button type="button" class="btn-close ms-3" onClick={()=> document.querySelector('.alert-success').classList.add('displayNone')} style={{position:'absolute' , top:'5px', right:'3px' , fontSize:'12px' }}></button>
+                                        </div>
+                                        
+                                    </div>
+                                )
+
+                               
+                            }
                             
                         </div>
 

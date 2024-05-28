@@ -13,15 +13,27 @@ Cb.belongsTo(Utilisateur)
 
 
 
-exports.enregistrementMembre = (req, res) => {
+exports.enregistrementMembre = async(req, res) => {
 
     const {nom , prenom , adresse , email , mot_de_passe} = req.body
     const {photo} = req.files
 
-    const passCrypte = bcrypt.hashSync(mot_de_passe , 12)
-    const couverture = nouveauNom(photo)
-    enregistrement(photo , couverture)
-    ajout(req , res , Utilisateur , {nom , prenom , adresse , email , badge : 'membre' , statut : "en attente" , photo : couverture , mot_de_passe : passCrypte })
+    const utilisateur = await Utilisateur.findOne({where:{email}})
+
+    if(utilisateur){
+
+        return res.status(200).json({server_msg : 'Cet email est déjà utilisé!'})
+
+    }else{
+
+        const passCrypte = bcrypt.hashSync(mot_de_passe , 12)
+        const couverture = nouveauNom(photo)
+        enregistrement(photo , couverture)
+        ajout(req , res , Utilisateur , {nom , prenom , adresse , email , badge : 'membre' , statut : "en attente" , photo : couverture , mot_de_passe : passCrypte })
+
+    }
+
+    
 
     
 }
@@ -42,10 +54,10 @@ exports.verificationCarte = async(req, res) => {
     
                return res.status(200).json({valide: true , carteId : carte.id})
                 
-            }else{return res.status(200).json({valide : false , message_error : "Votre carte est expirée"})}
+            }else{return res.status(200).json({valide : false , server_msg : "Votre carte est expirée"})}
     
 
-        }else{return res.status(200).json({valide : false , message_error : "Carte invalide"})}
+        }else{return res.status(200).json({valide : false , server_msg : "Carte invalide"})}
 
     }catch(error){console.log(error)}
 }
@@ -57,6 +69,7 @@ exports.validationPaiement = async(req, res) => {
     const {mot_de_passe , carteId} = req.body
     const droitMembre = 150
 
+
     try{
 
         let cbData = await Cb.findOne({where:{id:carteId}})
@@ -66,7 +79,7 @@ exports.validationPaiement = async(req, res) => {
 
             if(droitMembre > cbData.somme){
 
-            return res.status(200).json({message_error : `Vous n'avez pas assez d'argent pour payez le droit! Veuillez consulter votre solde`})
+            return res.status(200).json({server_msg : `Vous n'avez pas assez d'argent pour payez le droit! Veuillez consulter votre solde`})
 
             }else{
 
@@ -74,14 +87,14 @@ exports.validationPaiement = async(req, res) => {
             await cbData.save()
             utilisateur.statut = "actif"
             await utilisateur.save()
-            return res.status(200).json({message : `Paiement validé! reconnectez-vous pour plus d'option `})
+            return res.status(200).json({ valide : true ,  server_msg : `Votre inscription est validé , connectez-vous maintenant  pour profiter de l'application `})
 
             }
 
 
         }else{
 
-           return res.status(200).json({message_error : "Mot de passe incorrecte!"})
+           return res.status(200).json({server_msg : "Mot de passe incorrecte!"})
         }
 
 
@@ -99,8 +112,6 @@ exports.login = async(req, res) => {
 
     const {email , mot_de_passe} = req.body
 
-    console.log(email , mot_de_passe)
-
     try{
 
         const utilisateur = await Utilisateur.findOne({where:{email}})
@@ -109,7 +120,7 @@ exports.login = async(req, res) => {
         const verificationMdp = bcrypt.compareSync(mot_de_passe , utilisateur.mot_de_passe)
         if(!verificationMdp) return res.status(200).json({message_error : "Mot de passe invalide!"})
 
-        const token = jwt.sign({id : utilisateur.id , email : utilisateur.email , badge : utilisateur.badge , status : utilisateur.statut} , 'secret')
+        const token = jwt.sign({id : utilisateur.id , email : utilisateur.email , badge : utilisateur.badge , status : utilisateur.statut} , 'secret' , {expiresIn : "5m"})
         return res.status(200).json({token , badge : utilisateur.badge}) 
 
     }catch(error){console.log(error)}
